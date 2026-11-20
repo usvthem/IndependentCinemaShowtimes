@@ -1,0 +1,377 @@
+[
+ {
+  "id": "pcc",
+  "name": "Prince Charles Cinema",
+  "area": "Leicester Square",
+  "lat": 51.5114,
+  "lng": -0.1305,
+  "url": "https://princecharlescinema.com",
+  "listUrl": "https://princecharlescinema.com/whats-on/",
+  "browser": "auto"
+ },
+ {
+  "id": "barbican",
+  "name": "Barbican",
+  "area": "Barbican",
+  "lat": 51.52,
+  "lng": -0.0936,
+  "url": "https://www.barbican.org.uk/whats-on/cinema",
+  "listUrl": "https://www.barbican.org.uk/whats-on?af[16]=16",
+  "browser": "auto",
+  "samples": [
+   "https://www.barbican.org.uk/whats-on/event/228294/performances"
+  ]
+ },
+ {
+  "id": "bfi",
+  "name": "BFI Southbank",
+  "area": "South Bank",
+  "lat": 51.5068,
+  "lng": -0.115,
+  "url": "https://whatson.bfi.org.uk",
+  "listUrl": "https://whatson.bfi.org.uk/Online/default.asp?BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Avenue_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Acity_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Amonth_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Aobject_type_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Acategory_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_from=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_to=&doWork%3A%3AWScontent%3A%3Asearch=1&BOparam%3A%3AWScontent%3A%3Asearch%3A%3Aarticle_search_id=25E7EA2E-291F-44F9-8EBC-E560154FDAEB&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_criteria=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_from=2026-11-14&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_to=2026-11-14",
+  "browser": "auto",
+  "samples": [
+   "https://whatson.bfi.org.uk/Online/default.asp?BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Avenue_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Acity_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Amonth_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Aobject_type_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Acategory_filter=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_from=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_to=&doWork%3A%3AWScontent%3A%3Asearch=1&BOparam%3A%3AWScontent%3A%3Asearch%3A%3Aarticle_search_id=25E7EA2E-291F-44F9-8EBC-E560154FDAEB&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_criteria=&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_from=2026-11-14&BOset%3A%3AWScontent%3A%3ASearchCriteria%3A%3Asearch_to=2026-11-20",
+   "https://whatson.bfi.org.uk/Online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=44365346-D223-4B93-9F8B-F98BF0F40932&BOparam::WScontent::loadArticle::context_id=E225F9A7-0517-4316-94EA-33976F1A250C"
+  ]
+ },
+ {
+  "id": "genesis",
+  "name": "Genesis Cinema",
+  "area": "Whitechapel",
+  "lat": 51.52,
+  "lng": -0.051,
+  "url": "https://www.genesiscinema.co.uk",
+  "listUrl": "https://www.genesiscinema.co.uk/whatson/all",
+  "browser": "auto"
+ },
+ {
+  "id": "closeup",
+  "name": "Close-Up Cinema",
+  "area": "Shoreditch",
+  "lat": 51.5236,
+  "lng": -0.0722,
+  "url": "https://www.closeupfilmcentre.com",
+  "listUrl": "https://www.ticketsource.com/close-up-cinema",
+  "rep": 1,
+  "browser": "auto",
+  "note": "Listings come from Close-Up’s ticketing page, so a few screenings may be missing."
+ },
+ {
+  "id": "garden",
+  "name": "The Garden Cinema",
+  "area": "Covent Garden",
+  "lat": 51.516,
+  "lng": -0.124,
+  "url": "https://www.thegardencinema.co.uk",
+  "listUrl": "https://www.thegardencinema.co.uk/",
+  "browser": "auto"
+ },
+ {
+  "id": "rio",
+  "name": "Rio Cinema",
+  "area": "Dalston",
+  "lat": 51.5486,
+  "lng": -0.0756,
+  "url": "https://riocinema.org.uk",
+  "listUrl": "https://riocinema.org.uk/Rio.dll/WhatsOn",
+  "browser": "auto"
+ },
+ {
+  "id": "curzonsoho",
+  "name": "Curzon Soho",
+  "area": "Soho",
+  "lat": 51.5133,
+  "lng": -0.1318,
+  "url": "https://www.curzon.com",
+  "listUrl": "https://www.curzon.com/venues/soho/?date=2026-11-14",
+  "browser": false,
+  "samples": [
+   "https://www.curzon.com/venues/soho/?date=2026-11-15"
+  ],
+  "skip": "Blocked by a bot-verification page"
+ },
+ {
+  "id": "curzonbl",
+  "name": "Curzon Bloomsbury",
+  "area": "Bloomsbury",
+  "lat": 51.523,
+  "lng": -0.123,
+  "url": "https://www.curzon.com",
+  "listUrl": "https://www.curzon.com/venues/bloomsbury/?date=2026-11-14",
+  "browser": false,
+  "samples": [
+   "https://www.curzon.com/venues/bloomsbury/?date=2026-11-15"
+  ],
+  "skip": "Blocked by a bot-verification page"
+ },
+ {
+  "id": "electric",
+  "name": "Electric Cinema Portobello",
+  "area": "Notting Hill",
+  "lat": 51.5155,
+  "lng": -0.2057,
+  "url": "https://www.electriccinema.co.uk",
+  "listUrl": "https://www.electriccinema.co.uk/data/data.json",
+  "browser": false
+ },
+ {
+  "id": "electricwc",
+  "name": "Electric Cinema White City",
+  "area": "White City",
+  "lat": 51.5086,
+  "lng": -0.2246,
+  "url": "https://www.electriccinema.co.uk",
+  "listUrl": "https://www.electriccinema.co.uk/data/data.json",
+  "browser": false
+ },
+ {
+  "id": "castle",
+  "name": "The Castle Cinema",
+  "area": "Hackney",
+  "lat": 51.5455,
+  "lng": -0.0553,
+  "url": "https://thecastlecinema.com",
+  "listUrl": "https://thecastlecinema.com/",
+  "browser": false
+ },
+ {
+  "id": "ica",
+  "name": "ICA Cinema",
+  "area": "The Mall",
+  "lat": 51.507,
+  "lng": -0.1306,
+  "url": "https://www.ica.art",
+  "listUrl": "https://www.ica.art/films/next-7-days",
+  "browser": "auto"
+ },
+ {
+  "id": "lexi",
+  "name": "The Lexi Cinema",
+  "area": "Kensal Rise",
+  "lat": 51.5337,
+  "lng": -0.2232,
+  "url": "https://thelexicinema.co.uk",
+  "listUrl": "https://thelexicinema.co.uk/TheLexiCinema.dll/WhatsOn",
+  "browser": "auto"
+ },
+ {
+  "id": "phoenix",
+  "name": "Phoenix Cinema",
+  "area": "East Finchley",
+  "lat": 51.5906,
+  "lng": -0.1652,
+  "url": "https://www.phoenixcinema.co.uk",
+  "listUrl": "https://www.phoenixcinema.co.uk/whats-on",
+  "browser": "auto"
+ },
+ {
+  "id": "regent",
+  "name": "Regent Street Cinema",
+  "area": "Oxford Circus",
+  "lat": 51.5182,
+  "lng": -0.1409,
+  "url": "https://www.regentstreetcinema.com",
+  "listUrl": "https://www.regentstreetcinema.com/now-playing",
+  "rep": 1,
+  "browser": "auto"
+ },
+ {
+  "id": "riverside",
+  "name": "Riverside Studios",
+  "area": "Hammersmith",
+  "lat": 51.488,
+  "lng": -0.2269,
+  "url": "https://www.riversidestudios.co.uk",
+  "listUrl": "https://riversidestudios.co.uk/whats-on/#page=1&view=list&top_filter=all&event_type=101",
+  "browser": "auto"
+ },
+ {
+  "id": "nickel",
+  "name": "The Nickel Cinema",
+  "area": "Clerkenwell",
+  "lat": 51.5217,
+  "lng": -0.1117,
+  "url": "https://thenickel.co.uk",
+  "listUrl": "https://thenickel.co.uk/",
+  "rep": 1,
+  "browser": false,
+  "samples": [
+   "https://thenickel.co.uk/screening/826"
+  ]
+ },
+ {
+  "id": "lumiere",
+  "name": "Cinéma Lumière",
+  "area": "South Kensington",
+  "lat": 51.4941,
+  "lng": -0.1737,
+  "url": "https://www.institut-francais.org.uk",
+  "listUrl": "https://www.institut-francais.org.uk/whats-on/?type=72&period=any&location=onsite",
+  "rep": 1,
+  "browser": "auto"
+ },
+ {
+  "id": "peckhamplex",
+  "name": "Peckhamplex",
+  "area": "Peckham",
+  "lat": 51.4733,
+  "lng": -0.0674,
+  "url": "https://www.peckhamplex.london",
+  "listUrl": "https://www.peckhamplex.london/films/out-now",
+  "browser": "auto"
+ },
+ {
+  "id": "cinereal",
+  "name": "Ciné Reel",
+  "area": "Homerton",
+  "lat": 51.5455,
+  "lng": -0.0553,
+  "url": "https://www.cine-real.com",
+  "listUrl": "https://www.cine-real.com/whats-on",
+  "browser": "auto",
+  "note": "Screens 16mm films at The Castle Cinema."
+ },
+ {
+  "id": "chiswick",
+  "name": "Chiswick Cinema",
+  "area": "Chiswick",
+  "lat": 51.4929,
+  "lng": -0.2574,
+  "url": "https://www.chiswickcinema.co.uk",
+  "listUrl": "https://www.chiswickcinema.co.uk/full-programme-by-day/",
+  "browser": "auto"
+ },
+ {
+  "id": "davidlean",
+  "name": "David Lean Cinema",
+  "area": "Croydon",
+  "lat": 51.3739,
+  "lng": -0.0985,
+  "url": "https://www.davidleancinema.org.uk",
+  "listUrl": "https://www.davidleancinema.org.uk",
+  "browser": "auto"
+ },
+ {
+  "id": "powerstation",
+  "name": "The Cinema in The Power Station",
+  "area": "Battersea",
+  "lat": 51.4817,
+  "lng": -0.1445,
+  "url": "https://www.thecinemainthepowerstation.com",
+  "listUrl": "https://www.thecinemainthepowerstation.com/whats-on",
+  "browser": "auto",
+  "skip": "Blocked: the site refuses automated visitors (403)"
+ },
+ {
+  "id": "actone",
+  "name": "ActOne Cinema",
+  "area": "Acton",
+  "lat": 51.509,
+  "lng": -0.2685,
+  "url": "https://actonecinema.co.uk",
+  "listUrl": "https://actonecinema.co.uk/ActOneCinema.dll/WhatsOn",
+  "browser": "auto",
+  "samples": [
+   "https://actonecinema.co.uk/ActOneCinema.dll/WhatsOn?f=811753"
+  ]
+ },
+ {
+  "id": "arthouse",
+  "name": "ArtHouse Crouch End",
+  "area": "Crouch End",
+  "lat": 51.5815,
+  "lng": -0.123,
+  "url": "https://www.arthousecrouchend.co.uk",
+  "listUrl": "https://www.arthousecrouchend.co.uk/",
+  "browser": "auto",
+  "samples": [
+   "https://www.arthousecrouchend.co.uk/programme/?programme_id=10446261",
+   "https://arthousecrouchend.savoysystems.co.uk/ArtHouseCrouchEnd.dll/WhatsOn"
+  ]
+ },
+ {
+  "id": "dochouse",
+  "name": "Bertha DocHouse",
+  "area": "Bloomsbury",
+  "lat": 51.5232,
+  "lng": -0.1222,
+  "url": "https://dochouse.org",
+  "listUrl": "https://dochouse.org/whats-on/",
+  "browser": "auto",
+  "samples": [
+   "https://dochouse.org/event/a-fox-under-a-pink-moon/"
+  ]
+ },
+ {
+  "id": "cinemamuseum",
+  "name": "The Cinema Museum",
+  "area": "Kennington",
+  "lat": 51.4939,
+  "lng": -0.1095,
+  "url": "https://cinemamuseum.org.uk",
+  "listUrl": "https://api.ticketlab.co.uk/api/events/cinemamuseum/UK",
+  "samples": [
+   "https://cinemamuseum.org.uk/schedule/category/events/"
+  ]
+ },
+ {
+  "id": "coldharbour",
+  "name": "Coldharbour Blue",
+  "area": "Loughborough Junction",
+  "lat": 51.4655,
+  "lng": -0.1022,
+  "url": "https://www.coldharbourblue.com",
+  "listUrl": "https://www.coldharbourblue.com/screenings/",
+  "browser": "auto",
+  "samples": [
+   "https://www.coldharbourblue.com/?post_type=tribe_events&p=16811"
+  ]
+ },
+ {
+  "id": "arzner",
+  "name": "The Arzner",
+  "area": "Bermondsey",
+  "lat": 51.4977,
+  "lng": -0.0808,
+  "url": "https://thearzner.com",
+  "listUrl": "https://thearzner.com/TheArzner.dll/WhatsOn",
+  "browser": "auto",
+  "samples": [
+   "https://thearzner.com/TheArzner.dll/WhatsOn?f=345319"
+  ]
+ },
+ {
+  "id": "kiln",
+  "name": "Kiln Cinema",
+  "area": "Kilburn",
+  "lat": 51.544,
+  "lng": -0.1925,
+  "url": "https://kilntheatre.com",
+  "listUrl": "https://kilntheatre.com/cinema-listings/",
+  "browser": "auto",
+  "samples": [
+   "https://kilntheatre.com/whats-on/",
+   "https://kilntheatre.com/whats-on/fatherland/",
+   "https://kilntheatre.com/whats-on/fatherland/book/928249/"
+  ]
+ },
+ {
+  "id": "deptford",
+  "name": "Deptford Cinema",
+  "area": "Deptford (venue varies)",
+  "lat": 51.479,
+  "lng": -0.0265,
+  "url": "https://deptfordcinema.org",
+  "listUrl": "https://deptfordcinema.org/new-events?view=calendar",
+  "browser": "auto",
+  "nomadic": true,
+  "note": "No fixed venue: about one screening a month, and the location changes each time. Check the event page.",
+  "samples": [
+   "https://deptfordcinema.org/new-events/sfs/uspeele-5fzd3-mj2lp-g7j6f-9p6pg",
+   "https://www.ticketsource.com/deptfordcinema/stalker-1979/2026-11-29/19:30/t-njmqxvx",
+   "https://www.ticketsource.com/booking/select/lrwevkdeepya"
+  ]
+ }
+]

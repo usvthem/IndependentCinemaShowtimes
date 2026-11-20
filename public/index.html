@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Independent Cinema Showtimes</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--ink:#1d1b19;--mut:#6e6a64;--line:#e4dfd7;--acc:#b3261e;--accb:#fbe9e7;--accfg:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161412;--card:#201d1a;--ink:#f2eee8;--mut:#9b958c;--line:#34302b;--acc:#ff7a6e;--accb:#3a1f1c;--accfg:#1b1210;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#161412;--card:#201d1a;--ink:#f2eee8;--mut:#9b958c;--line:#34302b;--acc:#ff7a6e;--accb:#3a1f1c;--accfg:#1b1210;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:12px 16px 24px}
+h1{font-size:1.3rem;margin:6px 0 0;text-align:center}
+.sub{color:var(--mut);margin:2px 0 12px;font-size:.9rem;text-align:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+.lbl.first{margin-top:0}
+.lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:12px 0 6px}
+input,select{font:inherit;width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.seg{display:flex;gap:6px}
+.seg button{flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 10px;font:inherit;font-size:.9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+.link{display:inline-flex;align-items:center;gap:6px;margin-top:8px;border:1px solid var(--line);background:var(--bg);color:var(--mut);border-radius:999px;font:inherit;font-size:.8rem;padding:4px 12px;cursor:pointer}
+.link:hover{color:var(--ink)}
+.pick{display:inline-flex;align-items:center;gap:8px;margin-top:10px;border:1px solid var(--mut);background:var(--card);color:var(--ink);border-radius:999px;font:inherit;font-size:.88rem;font-weight:500;padding:6px 14px;cursor:pointer}
+.pick:hover{background:var(--bg)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chip{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.82rem}
+.chip b{cursor:pointer;color:var(--acc);font-weight:600}
+.sugg{border:1px solid var(--line);border-radius:8px;margin-top:4px;overflow-y:auto;max-height:260px;overscroll-behavior:contain}
+.sugg button{display:block;width:100%;text-align:left;padding:8px 12px;border:0;border-bottom:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.sugg button:last-child{border:0}
+.dayrow{display:flex;gap:6px}
+.prefhd{display:flex;justify-content:space-between;align-items:center;min-height:26px}
+.psum{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.psum.sum{font-size:.9rem;text-transform:none;letter-spacing:0;color:var(--ink)}
+#prefs{position:relative}
+#prefBody{margin-top:8px}
+#prefs.open .prefhd{position:absolute;top:8px;right:8px;min-height:0;z-index:1}
+#prefs.open #prefBody{margin-top:0}
+#daycard{padding:8px 10px}
+.days{display:flex;gap:6px;flex:1;min-width:0}
+.days button{flex:1 1 0;min-width:0;text-align:center;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:5px 2px;font:inherit;font-size:.82rem;line-height:1.25;cursor:pointer}
+.days button[aria-pressed="true"]{background:var(--acc);color:var(--accfg);border-color:var(--acc);font-weight:600;cursor:default}
+.days small{color:inherit;opacity:.85}
+.cal{position:relative;flex:0 0 40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:12px;color:var(--ink);cursor:pointer}
+.cal input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;padding:0;border:0}
+.rel{display:flex;justify-content:flex-start;align-items:center;gap:14px;margin-top:8px;font-size:.78rem;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.fmenu{position:relative;flex:0 0 40px;display:flex}
+.fbtn{position:relative;width:40px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.fbtn[aria-expanded="true"],.fbtn.on{border-color:var(--acc);color:var(--acc)}
+.fc{position:absolute;top:-6px;right:-6px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--acc);color:var(--accfg);font-size:.68rem;font-weight:600;display:flex;align-items:center;justify-content:center}
+.fc:empty{display:none}
+.fpanel{position:absolute;right:0;top:calc(100% + 8px);z-index:5;min-width:240px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;box-shadow:0 6px 20px rgba(0,0,0,.18);text-transform:none;letter-spacing:0;color:var(--ink);font-size:.9rem}
+.fpanel[hidden]{display:none}
+.fpanel label{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer}
+.fpanel input{width:auto;margin-top:3px;accent-color:var(--acc)}
+.fpanel small{display:block;color:var(--mut);font-size:.75rem}
+.fpanel .link{margin-top:4px}
+.rel select{width:auto;padding:3px 8px;font-size:.82rem;border-radius:999px;text-transform:none;letter-spacing:0}
+.foot{color:var(--mut);font-size:.82rem;text-align:center;margin:0 0 10px}
+footer.foot{margin:18px 0 0}footer.foot p{margin:4px 0}
+.cin{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+.hd{display:flex;justify-content:space-between;align-items:flex-start}
+.cin h3{margin:0;font-size:1.05rem}
+.cin .meta{color:var(--mut);font-size:.82rem;margin-bottom:6px}
+.hb{display:flex;align-items:center;gap:2px}
+.chev{border:0;background:none;color:var(--mut);cursor:pointer;padding:2px 4px;line-height:0}
+.chev svg{transition:transform .15s}
+.chev[aria-expanded="false"] svg{transform:rotate(-90deg)}
+.star{border:0;background:none;color:var(--acc);line-height:0;cursor:pointer;padding:2px 3px}
+.cnote{color:var(--mut);font-size:.75rem;margin:-2px 0 6px}
+.film{margin:10px 0 0}
+.film .t{font-weight:600;font-size:.95rem}
+.times{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+a.time{text-decoration:none;color:var(--acc);border:1px solid var(--acc);border-radius:8px;padding:4px 10px;font-weight:600;font-size:.9rem}
+a.time:hover{background:var(--accb)}
+.empty{color:var(--mut);text-align:center;padding:24px 8px}
+small{color:var(--mut)}
+@media (max-width:400px){.dayrow{gap:5px}.days{gap:3px}.days button{font-size:.68rem;padding:5px 0}.days small{font-size:.64rem}.days button[aria-pressed="true"]{font-weight:500}.cal,.fmenu,.fbtn{flex-basis:34px;width:34px}.fmenu{width:34px}}
+</style>
+</head>
+<body>
+<main>
+<h1>Independent Cinema Showtimes</h1>
+<p class="sub">What’s on everywhere (in London)</p>
+
+<div class="card" id="prefs">
+  <div class="prefhd"><span class="psum" id="psum"></span><button class="chev" id="prefToggle" aria-expanded="true" title="Hide preferences"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+  <div id="prefBody">
+    <div class="lbl first">Cinemas</div>
+    <div class="seg" id="source"></div>
+    <div id="srcPanel"></div>
+    <div class="lbl">Film</div>
+    <input id="film" list="films" placeholder="Search a film (optional)" autocomplete="off">
+    <datalist id="films"></datalist>
+    <div class="rel" id="relWrap"><label for="era">Release date</label>
+        <select id="era" title="New releases are films from 2020 onwards"><option value="all">Any</option><option value="new">New releases only</option><option value="old">Older films only</option></select></div>
+  </div>
+</div>
+<div class="card" id="daycard"><div class="dayrow"><div class="days" id="days"></div>
+    <label class="cal" title="Pick another day"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM4 10h16M8 3v4M16 3v4"/></svg><input type="date" id="dp" aria-label="Pick another day"></label>
+    <div class="fmenu"><button class="fbtn" id="fbtn" aria-expanded="false" aria-haspopup="true" title="Filters"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span class="fc" id="fcount"></span></button>
+      <div class="fpanel" id="fpanel" hidden>
+          <label><input type="checkbox" data-f="mat"><span>Matinees</span></label>
+          <label><input type="checkbox" data-f="spec"><span>Special events<small>Q&amp;As, intros, previews, marathons, etc.</small></span></label>
+          <label><input type="checkbox" data-f="film"><span>On film</span></label>
+          <button class="link" id="fclear" type="button">Clear filters</button>
+      </div></div></div></div>
+
+<p class="foot" id="note" style="display:none"></p>
+<div id="results"></div>
+<footer class="foot" id="foot"><p id="upd"></p><p>Always check the cinema’s own site before you travel. Release years come from TMDB; this product uses the TMDB API but is not endorsed or certified by TMDB. Your location is only used in your browser, and favorites are stored on your device.</p></footer>
+</main>
+
+<script>
+let CIN=[];const FILMS=[],YEAR={},OLD=2020,RADIUS=5;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const km=(a,b)=>{const r=Math.PI/180,dl=(b.lat-a.lat)*r,dn=(b.lng-a.lng)*r;const x=Math.sin(dl/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dn/2)**2;return 12742*Math.asin(Math.sqrt(x))};
+
+const S={filters:new Set(),prefsOpen:true,collapsed:new Set(),jump:false,view:null,film:"",source:"near",era:"all",date:iso(new Date()),edit:false,pos:null,posNote:"",left:0,seq:0,poll:null,pick:[],
+  favs:["pcc","barbican","bfi","genesis","closeup","garden"]};
+try{const j=JSON.parse(localStorage.getItem("indie-favs")||"null");if(Array.isArray(j))S.favs=j;else{const o=JSON.parse(localStorage.getItem("indie-lists")||"null");if(o&&o.lists)S.favs=o.lists[o.active]||Object.values(o.lists)[0]||S.favs}}catch(e){}
+const save=()=>{try{localStorage.setItem("indie-favs",JSON.stringify(S.favs))}catch(e){}};
+try{localStorage.removeItem("indie-collapsed")}catch(e){} // collapsed cinemas are not remembered between visits
+try{S.prefsOpen=localStorage.getItem("indie-prefs-open")!=="0"}catch(e){}
+
+
+/* Two ways to get data. On the published site, showtimes.json sits next to the page and everything is worked out here in the
+   browser. Run locally with `npm start`, there is no such file and the server's /api is used instead. */
+let STATIC=null;
+async function loadStatic(){
+  try{
+    const r=await fetch("showtimes.json",{cache:"no-cache"});if(!r.ok)return;
+    const j=await r.json();if(!Array.isArray(j.rows)||!Array.isArray(j.cinemas))return;
+    j.byDate=new Map();for(const x of j.rows)(j.byDate.get(x.date)||j.byDate.set(x.date,[]).get(x.date)).push(x);
+    STATIC=j;
+  }catch(e){}
+}
+function showUpdated(ms){
+  const el=$("upd");if(!el||!ms)return;
+  const d=new Date(ms),age=Date.now()-ms;
+  el.textContent="Showtimes last updated "+d.toLocaleString("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+".";
+  S.stale=age>36*36e5; // more than a day and a half old: something has stopped updating
+}
+async function getShowtimes(ids,dateISO){
+  let j;
+  if(STATIC){
+    const want=ids.length?new Set(ids):null;
+    j={rows:(STATIC.byDate.get(dateISO)||[]).filter(r=>!want||want.has(r.cinema)).sort((a,b)=>a.time.localeCompare(b.time)),pending:[],yearsBusy:false,updated:STATIC.updated};
+  }else j=await(await fetch("/api/showtimes?date="+dateISO+"&cinemas="+encodeURIComponent(ids.join(",")))).json();
+  j.rows.forEach(x=>{if(x.year)YEAR[x.film]=x.year;if(!FILMS.includes(x.film))FILMS.push(x.film)});
+  $("films").innerHTML=FILMS.slice().sort().map(f=>`<option value="${esc(f)}">`).join("");
+  const left=(j.pending||[]).length;S.left=left;
+  showUpdated(j.updated);
+  const n=$("note"),msg=left?"Still loading "+left+" cinema"+(left>1?"s":"")+"…":(S.stale?"These showtimes haven’t been updated for a while and may be out of date.":"");
+  n.style.display=msg?"block":"none";n.textContent=msg;
+  clearTimeout(S.poll);if(left||j.yearsBusy)S.poll=setTimeout(()=>results(),3000);
+  return j.rows;
+}
+
+function seg(el,opts,cur,fn){
+  el.innerHTML=opts.map(o=>`<button aria-pressed="${o[0]===cur}" data-v="${o[0]}">${o[1]}</button>`).join("");
+  el.onclick=e=>{const b=e.target.closest("button");if(b)fn(b.dataset.v)};
+}
+function locate(){
+  S.posNote="Finding your location…";draw();
+  const fall=m=>{S.pos={lat:51.5113,lng:-0.1281};S.posNote=m+" Using central London.";draw()};
+  if(!navigator.geolocation)return fall("Location isn’t available.");
+  navigator.geolocation.getCurrentPosition(p=>{S.pos={lat:p.coords.latitude,lng:p.coords.longitude};S.posNote="";draw()},()=>fall("Couldn’t get your location."),{timeout:8000});
+}
+function chosenCinemas(){
+  if(S.source==="fav")return S.favs.filter(i=>CIN.some(c=>c.id===i));
+  if(S.source==="all")return S.pick.length?S.pick:CIN.filter(c=>!c.unavailable).map(c=>c.id);
+  if(!S.pos)return[];
+  return CIN.filter(c=>!c.unavailable&&!c.nomadic&&km(S.pos,c)<=RADIUS).sort((a,b)=>km(S.pos,a)-km(S.pos,b)).map(c=>c.id);
+}
+
+function picker(p,list,set,empty){
+  p.innerHTML=`<div class="chips">${list.map(i=>{const c=CIN.find(x=>x.id===i);return c?`<span class="chip">${esc(c.name)} <b data-rm="${i}" title="Remove">×</b></span>`:""}).join("")||`<small>${empty}</small>`}</div>
+  <input id="ac" placeholder="Add a cinema: type e.g. prince charles" autocomplete="off"><div id="sg"></div>`;
+  p.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>set(list.filter(x=>x!==b.dataset.rm)));
+  /* Focusing the box lists every cinema not yet added (scrollable); typing narrows the list. */
+  const show=()=>{
+    const q=norm($("ac").value.trim());
+    const m=CIN.filter(c=>!list.includes(c.id)&&(!q||norm(c.name+" "+c.area).includes(q)));
+    $("sg").innerHTML=m.length?`<div class="sugg">${m.map(c=>`<button data-a="${c.id}">${esc(c.name)} <small>· ${esc(c.area)}${c.unavailable?" · showtimes unavailable":""}</small></button>`).join("")}</div>`:(q?`<small>No match among the ${CIN.length} cinemas covered.</small>`:`<small>Every cinema is already added.</small>`);
+    $("sg").querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>{S.keepList=true;set([...list,b.dataset.a])});
+  };
+  $("ac").onfocus=$("ac").onclick=$("ac").oninput=show;
+  if(S.keepList){S.keepList=false;show()} // after adding one, leave the list open for the next
+  if(!window.pkOut){window.pkOut=1;document.addEventListener("pointerdown",e=>{const sg=$("sg");if(sg&&!e.target.closest("#pk"))sg.innerHTML=""})} // tap elsewhere to close the list
+}
+function panel(){
+  const p=$("srcPanel");
+  if(S.source==="near"){p.innerHTML=S.posNote?`<small>${esc(S.posNote)}</small>`:"";return}
+  const fav=S.source==="fav",list=fav?S.favs:S.pick;
+  if(fav&&!list.length&&!S.autoOpened){S.edit=true;S.autoOpened=true} // an empty favorites list opens itself so adding is obvious
+  const open=S.edit?"▴":"▾";
+  const txt=fav?`Edit favorites (${list.length}) ${open}`:(list.length?`Showing ${list.length} of ${CIN.length} cinemas ${open}`:`Pick cinemas ${open}`);
+  p.innerHTML=`<button class="pick" id="edit">${txt}</button><div id="pk"></div>`;
+  $("edit").onclick=()=>{S.edit=!S.edit;panel()};
+  if(S.edit)picker($("pk"),list,v=>{if(fav){S.favs=v;save()}else S.pick=v;draw()},fav?"No favorites yet. Add one below, or tap the heart on a cinema.":"Showing all "+CIN.length+" cinemas. Add some below to narrow it down.");
+}
+function days(){
+  const t=new Date(),strip=[...Array(window.innerWidth<400?5:6)].map((_,i)=>{const d=new Date(t);d.setDate(t.getDate()+i);return d});
+  const pill=(d,label)=>`<button data-v="${iso(d)}" aria-pressed="${iso(d)===S.date}">${label}<br><small>${d.getDate()}/${d.getMonth()+1}</small></button>`;
+  let h=strip.map((d,i)=>pill(d,i?d.toLocaleDateString("en-GB",{weekday:"short"}):"Today")).join("");
+  if(!strip.some(d=>iso(d)===S.date)){const d=new Date(S.date+"T12:00:00");h+=pill(d,d.toLocaleDateString("en-GB",{weekday:"short"}))}
+  $("days").innerHTML=h;
+  $("days").onclick=e=>{const b=e.target.closest("button");if(b&&b.dataset.v!==S.date){S.date=b.dataset.v;S.jump=false;days();results()}};
+  const dp=$("dp");dp.min=iso(t);const mx=new Date(t);mx.setDate(t.getDate()+120);dp.max=iso(mx);
+}
+const SPECIAL=/\b(q\s*&\s*a|q\s*\+\s*a|q and a|intro(duction|duced)?|discussion|panel|preview|marathon|double (bill|feature)|triple (bill|feature)|screentalk|in conversation|live (music|score|organ|accompaniment|performance)|sing-?along|quiz|festival|premiere|retrospective|tribute|lecture|workshop|mystery|nt live|national theatre live|royal ballet|royal opera|opera|special guest)\b/i;
+const ON_FILM=/\b(8\s?mm|16\s?mm|35\s?mm|70\s?mm|super 8|nitrate|on film|film print)\b/i;
+const passes=r=>(!S.filters.has("mat")||r.time<"16:00")&&(!S.filters.has("spec")||SPECIAL.test(r.film)||/\s\+\s/.test(r.film))&&(!S.filters.has("film")||ON_FILM.test(r.film)||ON_FILM.test(r.fmt||""));
+async function nextDay(ids){
+  const f=norm(S.film.trim());
+  const get=async from=>{
+    if(STATIC){let best=null;for(const r of STATIC.rows)if(ids.includes(r.cinema)&&r.date>=from&&(best===null||r.date<best)&&norm(r.film).includes(f))best=r.date;return best}
+    return(await(await fetch(`/api/next-date?film=${encodeURIComponent(S.film.trim())}&cinemas=${encodeURIComponent(ids.join(","))}&from=${from}`)).json()).date;
+  };
+  let d=await get(iso(new Date()));
+  if(d===S.date){const t=new Date();t.setDate(t.getDate()+1);d=await get(iso(t))} // nothing left today: look from tomorrow
+  return d;
+}
+async function results(){
+  const R=$("results"),my=++S.seq,ids=chosenCinemas(),q=norm(S.film.trim());
+  if(!ids.length){R.innerHTML=`<div class="empty">${S.source==="near"?(S.posNote||"No cinemas within "+RADIUS+" km."):"No cinemas selected."}</div>`;return}
+  let rows=await getShowtimes(ids,S.date);
+  if(my!==S.seq)return; // a newer request has taken over
+  if(q)rows=rows.filter(r=>norm(r.film).includes(q));
+  else{
+    if(S.era==="new")rows=rows.filter(r=>YEAR[r.film]>=OLD);
+    if(S.era==="old")rows=rows.filter(r=>YEAR[r.film]<OLD);
+  }
+  if(S.filters.size)rows=rows.filter(passes);
+  if(S.date===iso(new Date())){const n=new Date(),cur=String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0");rows=rows.filter(r=>r.time>=cur)}
+  const gone=(q||S.era!=="all"||S.filters.size)?[]:ids.map(id=>CIN.find(x=>x.id===id)).filter(c=>c&&c.unavailable);
+  if(!rows.length&&!gone.length){
+    if(q&&S.jump&&!S.left){ // a film was just searched for and isn't on today's pick: go to the first day it is
+      S.jump=false;
+      const d=await nextDay(ids);
+      if(my!==S.seq)return;
+      if(d&&d!==S.date){S.date=d;days();return results()}
+    }
+    R.innerHTML=`<div class="empty">${S.left?"Loading showtimes…":S.filters.size?"No showtimes match these filters on this day. Try another day, or clear the filters.":"No showtimes found for this day. Try another day or a wider selection."}</div>`;return;
+  }
+  S.jump=false;
+  S.view={ids,rows,gone};paint();
+}
+function paint(){
+  const R=$("results"),{ids,rows,gone}=S.view;
+  const HEART="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+  const star=(id,fav)=>`<button class="star" data-fav="${id}" title="${fav?"Remove from favorites":"Add to favorites"}" aria-pressed="${fav}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="${HEART}" fill="${fav?"currentColor":"none"}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button>`;
+  R.innerHTML=ids.map(id=>{
+    const mine=rows.filter(r=>r.cinema===id);if(!mine.length)return"";
+    const c=CIN.find(x=>x.id===id),dist=S.source==="near"&&S.pos?` · ${km(S.pos,c).toFixed(1)} km`:"";
+    const by={};mine.forEach(r=>(by[r.film]=by[r.film]||[]).push(r));
+    const col=S.collapsed.has(id),nf=Object.keys(by).length;
+    return `<div class="cin"><div class="hd"><h3>${esc(c.name)}</h3><div class="hb"><button class="chev" data-col="${id}" aria-expanded="${!col}" title="${col?"Show":"Hide"} showtimes"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${star(id,S.favs.includes(id))}</div></div><div class="meta">${esc(c.area)}${dist}${col?` · ${nf} film${nf>1?"s":""}, ${mine.length} showtime${mine.length>1?"s":""}`:""}</div>`+
+      (col||!c.note?"":`<div class="cnote">${esc(c.note)}</div>`)+(col?"":Object.keys(by).sort().map(f=>`<div class="film"><div class="t">${esc(f)} ${YEAR[f]?`<small>(${YEAR[f]})</small>`:""}</div><div class="times">${by[f].map(r=>`<a class="time" href="${esc(r.url)}" target="_blank" rel="noopener" title="Book ${esc(f)} at ${esc(c.name)}">${r.time}</a>`).join("")}</div></div>`).join(""))+`</div>`;
+  }).join("")+gone.map(c=>`<div class="cin"><div class="hd"><h3>${esc(c.name)}</h3><div class="hb">${star(c.id,S.favs.includes(c.id))}</div></div><div class="meta">${esc(c.area)}</div>${c.note?`<div class="cnote">${esc(c.note)}</div>`:""}<div class="film"><small>Showtimes can’t be loaded automatically for this cinema.</small> <a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--acc)">Visit their website</a></div></div>`).join("");
+  R.querySelectorAll("[data-fav]").forEach(b=>b.onclick=()=>{const i=b.dataset.fav;S.favs=S.favs.includes(i)?S.favs.filter(x=>x!==i):[...S.favs,i];save();draw()});
+  R.querySelectorAll("[data-col]").forEach(b=>b.onclick=()=>{const i=b.dataset.col;S.collapsed.has(i)?S.collapsed.delete(i):S.collapsed.add(i);paint()});
+}
+const FNAMES={mat:"Matinees",spec:"Special events",film:"On film"};
+function filters(){
+  const n=S.filters.size;
+  $("fcount").textContent=n||"";$("fbtn").classList.toggle("on",n>0);
+  $("fbtn").title=n?"Filters ("+n+" on)":"Filters";
+  document.querySelectorAll("#fpanel input").forEach(i=>i.checked=S.filters.has(i.dataset.f));
+}
+$("fbtn").onclick=e=>{e.stopPropagation();const p=$("fpanel");p.hidden=!p.hidden;$("fbtn").setAttribute("aria-expanded",!p.hidden)};
+$("fpanel").onclick=e=>e.stopPropagation();
+document.addEventListener("click",()=>{$("fpanel").hidden=true;$("fbtn").setAttribute("aria-expanded","false")});
+document.querySelectorAll("#fpanel input").forEach(i=>i.onchange=()=>{i.checked?S.filters.add(i.dataset.f):S.filters.delete(i.dataset.f);filters();prefs();results()});
+$("fclear").onclick=()=>{S.filters.clear();filters();prefs();results()};
+function prefs(){
+  const open=S.prefsOpen,t=$("prefToggle"),el=$("psum");
+  $("prefBody").style.display=open?"block":"none";
+  t.setAttribute("aria-expanded",open);t.title=open?"Hide preferences":"Show preferences";
+  el.className="psum"+(open?"":" sum");
+  $("prefs").classList.toggle("open",open);
+  if(open){el.textContent="";return}
+  const f=S.film.trim(),n=S.pick.length;
+  const parts=[f?"“"+f+"”":"All films",S.source==="near"?"Near me":S.source==="fav"?"Favorites":n?n+" cinema"+(n>1?"s":""):"All cinemas"];
+  if(!f&&S.era!=="all")parts.push(S.era==="new"?"New releases":"Older films");
+  el.textContent=parts.join(" · ");
+}
+$("prefToggle").onclick=()=>{S.prefsOpen=!S.prefsOpen;try{localStorage.setItem("indie-prefs-open",S.prefsOpen?"1":"0")}catch(e){}prefs()};
+function draw(){
+  seg($("source"),[["near","Near me"],["all","All"],["fav","Favorites"]],S.source,v=>{S.source=v;S.edit=false;if(v==="near"&&!S.pos)locate();else draw()});
+  days();panel();prefs();
+  $("relWrap").style.display=S.film.trim()?"none":"flex"; // the release filter only applies when browsing all films
+  results();
+}
+window.addEventListener("resize",()=>days());
+$("film").oninput=e=>{S.film=e.target.value;prefs();S.jump=!!S.film.trim();$("relWrap").style.display=S.film.trim()?"none":"flex";results()};
+$("era").onchange=e=>{S.era=e.target.value;prefs();results()};
+$("dp").onchange=e=>{if(e.target.value){S.date=e.target.value;S.jump=false;days();results()}};
+$("dp").onclick=e=>{try{e.target.showPicker()}catch(_){}};
+(async()=>{
+  await loadStatic();
+  try{CIN=STATIC?STATIC.cinemas:await(await fetch("/api/cinemas")).json()}catch(e){}
+  if(CIN.length){const keep=S.favs.filter(i=>CIN.some(c=>c.id===i));if(keep.length!==S.favs.length){S.favs=keep;save()}} // drop favorites for cinemas that were removed
+  if(S.source==="near")locate();else draw();
+})();
+</script>
+</body>
+</html>

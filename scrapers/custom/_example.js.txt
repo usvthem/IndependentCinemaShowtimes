@@ -1,0 +1,15 @@
+// Copy to scrapers/custom/<cinema-id>.js (e.g. pcc.js) to override the generic scraper.
+import * as cheerio from "cheerio";
+import {getPage,row} from "../util.js";
+export default async function(c){
+  const $=cheerio.load(await getPage(c,c.listUrl));
+  const out=[];
+  $(".film").each((_,f)=>{                       // one block per film: adjust selectors
+    const title=$(f).find("h2").text();
+    $(f).find("a.showtime").each((_,a)=>{        // one link per screening
+      const when=new Date($(a).attr("data-start")); // must parse to a Date
+      out.push(row(c,title,when,$(a).attr("href")));
+    });
+  });
+  return out;
+}

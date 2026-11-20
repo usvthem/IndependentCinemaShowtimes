@@ -1,0 +1,20 @@
+{
+ "name": "indie-showtimes",
+ "version": "1.0.0",
+ "type": "module",
+ "engines": {
+  "node": ">=18"
+ },
+ "scripts": {
+  "start": "node server.js",
+  "check": "node check.js",
+  "dump": "node dump.js",
+  "postinstall": "playwright install chromium",
+  "build": "node build.js"
+ },
+ "dependencies": {
+  "cheerio": "^1.0.0",
+  "express": "^4.19.2",
+  "playwright": "^1.48.0"
+ }
+}
