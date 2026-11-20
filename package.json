@@ -10,7 +10,8 @@
   "check": "node check.js",
   "dump": "node dump.js",
   "postinstall": "playwright install chromium",
-  "build": "node build.js"
+  "build": "node build.js",
+  "refresh": "node build.js closeup regent"
  },
  "dependencies": {
   "cheerio": "^1.0.0",

@@ -79,34 +79,6 @@
   "browser": "auto"
  },
  {
-  "id": "curzonsoho",
-  "name": "Curzon Soho",
-  "area": "Soho",
-  "lat": 51.5133,
-  "lng": -0.1318,
-  "url": "https://www.curzon.com",
-  "listUrl": "https://www.curzon.com/venues/soho/?date=2026-11-14",
-  "browser": false,
-  "samples": [
-   "https://www.curzon.com/venues/soho/?date=2026-11-15"
-  ],
-  "skip": "Blocked by a bot-verification page"
- },
- {
-  "id": "curzonbl",
-  "name": "Curzon Bloomsbury",
-  "area": "Bloomsbury",
-  "lat": 51.523,
-  "lng": -0.123,
-  "url": "https://www.curzon.com",
-  "listUrl": "https://www.curzon.com/venues/bloomsbury/?date=2026-11-14",
-  "browser": false,
-  "samples": [
-   "https://www.curzon.com/venues/bloomsbury/?date=2026-11-15"
-  ],
-  "skip": "Blocked by a bot-verification page"
- },
- {
   "id": "electric",
   "name": "Electric Cinema Portobello",
   "area": "Notting Hill",

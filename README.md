@@ -21,6 +21,16 @@ The page can run with no server: a GitHub Action scrapes every cinema twice a da
 After that it updates itself at 06:00 and 14:00 UTC (edit the `cron` lines in `.github/workflows/update.yml`). If the workflow ever stops running, press Run workflow; GitHub pauses schedules on repositories with no activity for 60 days. The page warns visitors when the data is more than a day and a half old.
 If the commit step fails with a permissions error: Settings > Actions > General > Workflow permissions > Read and write.
 
+**Cinemas that block GitHub's servers** (Close-Up, Regent Street) work from a home computer. To refresh them, in the project folder run:
+
+    git pull
+    npm run refresh
+    git add public/showtimes.json data/years.json
+    git commit -m "Refresh Close-Up and Regent"
+    git push
+
+Their showtimes are then kept by every automatic run until they pass (a cinema that fails keeps its earlier showtimes). Press Run workflow to publish straight away. Doing this about once a week is enough.
+
 Locally: `npm run build` does the same scrape into `public/showtimes.json` (`npm run build -- kiln deptford` for just those). `npm start` always uses the live server instead, even if that file exists.
 
 ## Deploy with a server instead (Render, a VPS)
