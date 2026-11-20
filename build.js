@@ -49,3 +49,4 @@ const lines=[`${flat.length} showtimes from ${ok.length} of ${ok.length+bad.leng
   ...(bad.length?["","Not working this run:",...bad.map(c=>`- ${c.id}: ${st[c.id].error||st[c.id].note||"no showtimes"}${st[c.id].kept?` (kept ${st[c.id].kept} earlier showtimes)`:""}`)]:[])];
 console.log(lines.join("\n"));
 if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"## Showtimes update\n"+lines.join("\n")+"\n");
+process.exit(0);
