@@ -1,0 +1,56 @@
+name: Update showtimes and publish
+
+on:
+  schedule:
+    - cron: "0 6 * * *"    # 06:00 UTC every day (07:00 in winter, 07:00-08:00 in summer London time: GitHub cron is always UTC)
+    - cron: "0 14 * * *"   # and again mid-afternoon, to catch late additions
+  workflow_dispatch:        # the "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write           # to save the updated showtimes.json back to the repo
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install (skip the Chromium download, we do it with system libraries below)
+        run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - name: Scrape every cinema
+        run: |
+          mkdir -p data
+          node build.js
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      - name: Save the new showtimes to the repo
+        run: |
+          git config user.name "showtimes-bot"
+          git config user.email "showtimes-bot@users.noreply.github.com"
+          git add public/showtimes.json
+          if [ -f data/years.json ]; then git add data/years.json; fi
+          if git diff --cached --quiet; then echo "Nothing changed"; else git commit -m "Update showtimes" && git push; fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
