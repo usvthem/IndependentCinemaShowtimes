@@ -126,7 +126,7 @@ const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+Stri
 const km=(a,b)=>{const r=Math.PI/180,dl=(b.lat-a.lat)*r,dn=(b.lng-a.lng)*r;const x=Math.sin(dl/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dn/2)**2;return 12742*Math.asin(Math.sqrt(x))};
 
 const S={filters:new Set(),prefsOpen:true,collapsed:new Set(),jump:false,view:null,film:"",source:"near",era:"all",date:iso(new Date()),edit:false,pos:null,posNote:"",left:0,seq:0,poll:null,pick:[],
-  favs:["pcc","barbican","bfi","genesis","closeup","garden"]};
+  favs:[]}; // everyone starts with no favorites and builds their own list
 try{const j=JSON.parse(localStorage.getItem("indie-favs")||"null");if(Array.isArray(j))S.favs=j;else{const o=JSON.parse(localStorage.getItem("indie-lists")||"null");if(o&&o.lists)S.favs=o.lists[o.active]||Object.values(o.lists)[0]||S.favs}}catch(e){}
 const save=()=>{try{localStorage.setItem("indie-favs",JSON.stringify(S.favs))}catch(e){}};
 try{localStorage.removeItem("indie-collapsed")}catch(e){} // collapsed cinemas are not remembered between visits
@@ -207,7 +207,7 @@ function panel(){
   const txt=fav?`Edit favorites (${list.length}) ${open}`:(list.length?`Showing ${list.length} of ${CIN.length} cinemas ${open}`:`Pick cinemas ${open}`);
   p.innerHTML=`<button class="pick" id="edit">${txt}</button><div id="pk"></div>`;
   $("edit").onclick=()=>{S.edit=!S.edit;panel()};
-  if(S.edit)picker($("pk"),list,v=>{if(fav){S.favs=v;save()}else S.pick=v;draw()},fav?"No favorites yet. Add one below, or tap the heart on a cinema.":"Showing all "+CIN.length+" cinemas. Add some below to narrow it down.");
+  if(S.edit)picker($("pk"),list,v=>{if(fav){S.favs=v;save()}else S.pick=v;draw()},fav?"No favorites yet.":"Showing all "+CIN.length+" cinemas. Add some below to narrow it down.");
 }
 function days(){
   const t=new Date(),strip=[...Array(window.innerWidth<400?5:6)].map((_,i)=>{const d=new Date(t);d.setDate(t.getDate()+i);return d});
@@ -233,7 +233,7 @@ async function nextDay(ids){
 }
 async function results(){
   const R=$("results"),my=++S.seq,ids=chosenCinemas(),q=norm(S.film.trim());
-  if(!ids.length){R.innerHTML=`<div class="empty">${S.source==="near"?(S.posNote||"No cinemas within "+RADIUS+" km."):"No cinemas selected."}</div>`;return}
+  if(!ids.length){R.innerHTML=`<div class="empty">${S.source==="near"?(S.posNote||"No cinemas within "+RADIUS+" km."):S.source==="fav"?"You haven’t marked any cinemas as favorites yet. Search for a cinema above to add it, or tap the heart on any cinema to save it here.":"No cinemas selected."}</div>`;return}
   let rows=await getShowtimes(ids,S.date);
   if(my!==S.seq)return; // a newer request has taken over
   if(q)rows=rows.filter(r=>norm(r.film).includes(q));
